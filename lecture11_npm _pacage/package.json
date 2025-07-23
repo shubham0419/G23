@@ -1,0 +1,15 @@
+{
+  "name": "@shubhamo7/otp-generator",
+  "version": "1.0.0",
+  "description": "this will return 6 numbers in string",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "otp",
+    "otpgenerator"
+  ],
+  "author": "shubhamo7",
+  "license": "ISC"
+}

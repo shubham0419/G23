@@ -1,18 +1,19 @@
 {
-  "name": "lecture9_mongoose_query_folder_structure",
+  "name": "otpgenerator",
   "version": "1.0.0",
-  "description": "",
+  "description": "this will give 6 numbers in string",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed":"node ./db/seed.js"
+    "seed": "node ./db/seed.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "shubhamo7",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "mongoose": "^8.16.3"
-  }
+  },
+  "devDependencies": {}
 }
