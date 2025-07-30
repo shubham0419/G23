@@ -2,7 +2,7 @@ const Todo = require("../models/todo.schema");
 
 const createTodo = async(req,res)=>{
   try {
-    const {task} = req.body;
+    const {task,status} = req.body;
     const todo = await Todo.create({
       task
     })
