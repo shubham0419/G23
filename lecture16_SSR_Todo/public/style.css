@@ -1,0 +1,37 @@
+
+#container{
+  width: 90vw;
+  box-shadow: 1px 1px 2px 1px;
+  padding: 15px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+#container>form{
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#container>form>input{
+  width: 80%;
+  height: 20px;
+}
+
+#filters{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+#filters>button{
+  padding: 5px 15px;
+  font-size: large;
+  border-radius: 10px;
+}
+
+.active{
+  background-color: greenyellow;
+  border: 1px solid gainsboro;
+}
