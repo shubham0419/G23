@@ -62,7 +62,26 @@ const editTodo = async(req,res)=>{
   } catch (error) {
     res.status(500).json({message:error.message});
   }
+}
+
+const filterTodo = async(req,res)=>{
+  try {
+    const {filter} = req.query;
+
+    if(!filter){
+      throw new Error("filter is required");
+    }
+
+    if(filter == "all"){
+      let todos = await Todo.find();
+      return res.status(200).json({todos})
+    }
+    let todos = await Todo.find({status:filter=="active"?true:false});
+    return res.status(200).json({todos})
+  } catch (error) {
+    res.status(500).json({message:error.message})
+  }
 
 }
-module.exports = {createTodo,updateTodo,deleteTodo,getAllTodo
+module.exports = {createTodo,updateTodo,deleteTodo,getAllTodo,filterTodo
   ,searchTodos,editTodo};

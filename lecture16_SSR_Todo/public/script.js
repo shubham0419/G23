@@ -2,6 +2,7 @@ const form = document.getElementById("task-form");
 const todo_container = document.getElementById("todos");
 
 function renderTodo(todos){
+  todo_container.innerHTML = "";
   for (let todo of todos){
     const div = document.createElement("div");
     div.style.display = "flex";
@@ -17,11 +18,14 @@ function renderTodo(todos){
 
 async function updateTodo(id){
   let res = await axios.put(`http://localhost:4000/todo/update/${id}`);
+  getAllTodo();
 }
 
 async function deleteTodo(id){
   let res = await axios.delete(`http://localhost:4000/todo/delete/${id}`);
+  getAllTodo();
 }
+
 todo_container.addEventListener("click",async (e)=>{
   const btnId = e.target.id;
   // console.log(e.target.parentElement); // return parent of element that is clicked
@@ -41,6 +45,7 @@ form.addEventListener("submit",async (e)=>{
   const res = await axios.post("http://localhost:4000/todo/create",{task:text});
   console.log(res.data);
   input.value = ""
+  getAllTodo();
 })
 
 async function getAllTodo(){
@@ -53,19 +58,31 @@ getAllTodo();
 
 const filtercontainer = document.getElementById("filters");
 
+async function filterTodo(filter){
+  const res = await axios.get("http://localhost:4000/todo/filter",{
+    params:{
+      filter:filter
+    }
+  });
+  renderTodo(res.data.todos);
+}
+
 filtercontainer.addEventListener("click",(e)=>{
   // console.log(e.target.id)
   const btnId = e.target.id;
   const filterBtns = filtercontainer.children;
   if(btnId=="all"){
+    filterTodo("all")
     e.target.className = "active";
     filterBtns[1].className = "";
     filterBtns[2].className = "";
   }else if(btnId=="active"){
+    filterTodo("active")
     e.target.className = "active";
     filterBtns[0].className = "";
     filterBtns[2].className = "";
   }else if(btnId=="completed"){
+    filterTodo("completed")
     e.target.className = "active";
     filterBtns[0].className = "";
     filterBtns[1].className = "";
