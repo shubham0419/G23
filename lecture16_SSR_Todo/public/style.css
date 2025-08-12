@@ -35,3 +35,14 @@
   background-color: greenyellow;
   border: 1px solid gainsboro;
 }
+
+#clear{
+  display: flex;
+  justify-content: center;
+}
+
+#clear>button{
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+}
