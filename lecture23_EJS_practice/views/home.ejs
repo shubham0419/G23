@@ -4,14 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 2rem;
+      color: #222;
+      letter-spacing: 1px;
+    }
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem auto;
+      max-width: 1200px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      padding: 1.5rem 1.2rem;
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .product-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #e9ecef;
+      margin-bottom: 1rem;
+    }
+    .product-card h3 {
+      color: #007bff;
+      margin: 0.5rem 0 0.2rem 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .product-card h2 {
+      margin: 0.2rem 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #222;
+      font-weight: 500;
+      text-align: center;
+    }
+    .product-card p {
+      color: #555;
+      font-size: 0.97rem;
+      text-align: center;
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>hello user</h1>
-  <!-- to get variable value (output tag)-->
-  <%= name %>
-  <% products.forEach(product => { %>
-   <h3> <%= product.name %> </h3>
-   <h5> <%= product.price %> </h5>
-  <% }) %>
+  <h1>Products</h1>
+  
+  <div class="products-container">
+    <% products.forEach(product => { %>
+      <div class="product-card">
+        <img src="" alt="">
+        <h3><%= product.price %></h3>
+        <h2><%= product.name %></h2>
+        <p><%= product.description %></p>
+        
+      </div>
+    <% }) %>
+  </div>
 </body>
 </html>

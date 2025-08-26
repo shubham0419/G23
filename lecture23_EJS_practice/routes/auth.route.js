@@ -6,6 +6,14 @@ const jwt = require("jsonwebtoken");
 const verifyUser = require("../middleware/auth.middleware");
 const verifyAdmin = require("../middleware/admin.middleware");
 
+router.get("/signup",(req,res)=>{
+  res.render("signup");
+})
+
+router.get("/login",(req,res)=>{
+  res.render("login");
+})
+
 router.post("/signup",async (req,res)=>{
   try {
     const {name,email,password} = req.body;
@@ -18,7 +26,8 @@ router.post("/signup",async (req,res)=>{
       email,
       password:hashPassword
     })
-    res.status(201).json({user});
+    res.redirect("/auth/login");
+    // res.status(201).json({user});
   } catch (error) {
     res.status(500).json({message:error.message})
   }
@@ -75,7 +84,8 @@ router.post("/login",async (req,res)=>{
     const token = jwt.sign({name:user.name,id:user._id},process.env.JWT_SECRET,
       {expiresIn:'1h'})
     res.cookie("token",token,{httpOnly:true,maxAge:24*60*60*1000,secure:true})
-    res.status(200).json({message:"user logged in successfully",token});
+    res.redirect("/");
+    // res.status(200).json({message:"user logged in successfully",token});
   } catch (error) {
     res.status(500).json({message:error.message})
   }
