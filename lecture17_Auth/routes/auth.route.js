@@ -9,7 +9,7 @@ router.post("/signup",async (req,res)=>{
     if(!name || !email || !password){
       throw new Error("All fields are required");
     }
-    const hashPassword = bcrypt.hash(password,10);
+    const hashPassword = await bcrypt.hash(password,10);
     const user = await User.create({
       name,
       email,
@@ -28,7 +28,7 @@ router.post("/login",async (req,res)=>{
     if(!user){
       throw new Error("Invalid email or password");
     }
-    const isMatched = bcrypt.compare(password,user.password);
+    const isMatched = await bcrypt.compare(password,user.password);
     if(!isMatched){
       throw new Error("Invalid email or password");
     }
