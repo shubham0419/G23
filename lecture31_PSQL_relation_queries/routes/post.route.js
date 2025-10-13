@@ -31,7 +31,7 @@ router.get("/all",async(req,res)=>{
         author:true,
         comments:{
           include:{author:true}
-        }
+        },
       }
     });
     res.status(200).json({allPosts})
