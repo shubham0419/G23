@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.5/dist/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    socket.on("connection", (client)=>{
+      console.log("user 2 connected",client.id);
+    })
+
+    socket.on("first",(data)=>{
+      console.log("socket",data);
+      
+    })
+
+    socket.emit("notice","how's your diwali!!")
+  </script>
+</body>
+</html>
