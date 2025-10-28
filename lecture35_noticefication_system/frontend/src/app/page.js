@@ -12,74 +12,49 @@ export default function Home() {
   const [notifications, setNotifications] = useState([]);
 
   // Initialize socket connection
-  useEffect(() => {
-    const newSocket = io('http://localhost:5000');
+  useEffect(()=>{
+    const newSocket = io("http://localhost:5000");
     setSocket(newSocket);
-
-    return () => newSocket.close();
-  }, []);
+  },[])
 
   // Listen for notifications
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on('notification', (notification) => {
-      setNotifications(prev => [notification, ...prev]);
-      
-      // Auto-remove notification after 5 seconds
-      setTimeout(() => {
-        setNotifications(prev => prev.filter(n => n !== notification));
-      }, 5000);
-    });
-
-    return () => socket.off('notification');
-  }, [socket]);
+  
 
   // Fetch posts
-  const fetchPosts = async () => {
-    const res = await fetch('http://localhost:5000/api/posts');
+  const getAllPost = async()=>{
+    const res = await fetch("http://localhost:5000/api/posts");
     const data = await res.json();
-    setPosts(data);
-  };
+    setPosts(data.posts)
+  }
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(()=>{
+    getAllPost();
+  },[])
 
   // Handle login
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (username.trim()) {
-      socket.emit('register', username);
-      setIsLoggedIn(true);
-    }
-  };
+  const handleLogin = async ()=>{
+
+  }
 
   // Create post
-  const handleCreatePost = async (e) => {
+  const handleCreatePost = async (e)=>{
     e.preventDefault();
-    if (!newPost.trim()) return;
-
-    await fetch('http://localhost:5000/api/posts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: newPost, author: username })
-    });
-
-    setNewPost('');
-    fetchPosts();
-  };
+    const payload = {
+      content:newPost,
+      author:username
+    }
+    const res = await fetch("http://localhost:5000/api/posts",{
+      method:"POST",
+      body:payload
+    })
+    const data = await res.json();
+    setPosts(data.posts);
+  }
 
   // Like post
-  const handleLike = async (postId) => {
-    await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username })
-    });
+  const handleLike = ()=>{
 
-    fetchPosts();
-  };
+  }
 
   if (!isLoggedIn) {
     return (

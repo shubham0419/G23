@@ -49,6 +49,7 @@ app.get('/api/posts', (req, res) => {
 // Create a new post
 app.post('/api/posts', (req, res) => {
   const { content, author } = req.body;
+  // author -> user 
   const newPost = {
     id: Date.now().toString(),
     content,
@@ -57,7 +58,7 @@ app.post('/api/posts', (req, res) => {
     createdAt: new Date()
   };
   posts.unshift(newPost);
-  res.json(newPost);
+  res.json(posts);
 });
 
 // Like a post
